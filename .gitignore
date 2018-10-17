@@ -1,0 +1,5 @@
+.vscode
+*.class
+*.vs
+*.txt
+*.out
