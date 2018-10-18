@@ -75,7 +75,7 @@ class MyString {
     }
 
     public MyString toLowerCase(){
-        char[] lowerChars = this.toCharArray().clone();
+        char[] lowerChars = this.toCharArray();
         for(int i = 0; i < lowerChars.length; i++){
             if('A' < lowerChars[i] && lowerChars[i] <= 'Z'){
                 lowerChars[i] += 'a' - 'A';
@@ -85,7 +85,12 @@ class MyString {
     }
 
     public MyString toUpperCase(){
-        
-        return new MyString();
+        char[] upperChars = this.toCharArray();
+        for(int i = 0; i < upperChars.length; i++){
+            if('a' <= upperChars[i] && upperChars[i] <= 'z'){
+                upperChars[i] -= 'a' - 'A';
+            }
+        }
+        return new MyString(upperChars);
     }
 }
