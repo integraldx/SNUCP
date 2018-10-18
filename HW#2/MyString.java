@@ -21,7 +21,7 @@ class MyString {
     public boolean equals(MyString str){
         boolean isEqual = true;
         if(str.length() != this.length()){
-            return false;
+            isEqual = false;
         }
         else{
             for(int i = 0; i < str.length(); i++){
@@ -34,8 +34,6 @@ class MyString {
     }
 
     public boolean equalsIgnoreCase(MyString str){
-
-
         return this.toLowerCase().equals(str.toLowerCase());
     }
 
