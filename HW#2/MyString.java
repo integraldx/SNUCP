@@ -24,7 +24,7 @@ class MyString {
     }
 
     public char[] toCharArray(){
-        char[] toReturn = new char[charVec.size()];
+        char[] toReturn = new char[charVec.size() + 1];
 
         int i = 0;
         for(Object ch : charVec){
@@ -36,8 +36,18 @@ class MyString {
     }
 
     public boolean equals(MyString str){
-
-        return true;
+        boolean isEqual = true;
+        if(str.length() != this.length()){
+            return false;
+        }
+        else{
+            for(int i = 0; i < str.length(); i++){
+                if(this.toCharArray()[i] != str.toCharArray()[i]){
+                    isEqual = false;
+                }
+            }
+        }
+        return isEqual;
     }
 
     public boolean equalsIgnoreCase(MyString str){
@@ -67,7 +77,7 @@ class MyString {
 
     public int length(){
 
-        return 0;
+        return charVec.size();
     }
 
     public MyString substring(int index1, int index2){
