@@ -1,38 +1,21 @@
 
 import java.util.*;
 class MyString {
-    Vector charVec;
+    char[] charArr;
 
     public MyString(){
-        charVec = new Vector(0);
+        charArr = new char[0];
     }
 
     public MyString(String str){
-        charVec = new Vector(0);
-
-        for(int i = 0; i < str.length(); i++){
-            charVec.addElement(str.toCharArray()[i]);
-        }
-
+        charArr = str.toCharArray();
     }
     public MyString(char[] chars){
-        charVec = new Vector(0);
-
-        for(int i = 0; i < chars.length; i++){
-            charVec.addElement(chars[i]);
-        }
+        charArr = chars.clone();
     }
 
     public char[] toCharArray(){
-        char[] toReturn = new char[charVec.size() + 1];
-
-        int i = 0;
-        for(Object ch : charVec){
-            toReturn[i] = (char)ch;
-            i++;
-        }
-
-        return toReturn;
+        return charArr.clone();
     }
 
     public boolean equals(MyString str){
@@ -52,7 +35,8 @@ class MyString {
 
     public boolean equalsIgnoreCase(MyString str){
 
-        return true;
+
+        return this.toLowerCase().equals(str.toLowerCase());
     }
 
     public boolean startswith(MyString str){
@@ -77,7 +61,7 @@ class MyString {
 
     public int length(){
 
-        return charVec.size();
+        return charArr.length;
     }
 
     public MyString substring(int index1, int index2){
@@ -91,12 +75,17 @@ class MyString {
     }
 
     public MyString toLowerCase(){
-
-        return new MyString();
+        char[] lowerChars = this.toCharArray().clone();
+        for(int i = 0; i < lowerChars.length; i++){
+            if('A' < lowerChars[i] && lowerChars[i] <= 'Z'){
+                lowerChars[i] += 'a' - 'A';
+            }
+        }
+        return new MyString(lowerChars);
     }
 
     public MyString toUpperCase(){
-
+        
         return new MyString();
     }
 }

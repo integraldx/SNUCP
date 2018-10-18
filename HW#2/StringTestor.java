@@ -35,9 +35,22 @@ class StringTestor{
         }
         System.out.println("String(equal String) : " + input.equals(new String(input.toCharArray())));
         System.out.println("MyString(equal String) : " + myString.equals(new MyString(input.toCharArray())));
+        System.out.println();
         if(input.equals(new String(input.toCharArray())) != myString.equals(new MyString(input.toCharArray()))){
             passed = false;
         }
+
+        System.out.println("toLowerCase() test");
+        System.out.println("String : " + input.toLowerCase());
+        System.out.println("MyString : " + new String(myString.toLowerCase().toCharArray()));
+    
+        for(int i = 0; i < input.length(); i++){
+            if(input.toLowerCase().toCharArray()[i] != myString.toLowerCase().toCharArray()[i]){
+                passed = false;
+            }
+        }
+
+    
         System.out.println("");
 
         
