@@ -1,92 +1,135 @@
 
 import java.util.*;
 class MyString {
-    Vector charVec;
+    char[] charArr;
 
     public MyString(){
-        charVec = new Vector(0);
+        charArr = new char[0];
     }
 
     public MyString(String str){
-        charVec = new Vector(0);
-
-        for(int i = 0; i < str.length(); i++){
-            charVec.addElement(str.toCharArray()[i]);
-        }
-
+        charArr = str.toCharArray();
     }
     public MyString(char[] chars){
-        charVec = new Vector(0);
-
-        for(int i = 0; i < chars.length; i++){
-            charVec.addElement(chars[i]);
-        }
+        charArr = chars.clone();
     }
 
+    //done
     public char[] toCharArray(){
-        char[] toReturn = new char[charVec.size()];
+        return charArr.clone();
+    }
 
-        int i = 0;
-        for(Object ch : charVec){
-            toReturn[i] = (char)ch;
-            i++;
+    //done
+    public boolean equals(MyString str){
+        boolean isEqual = true;
+        if(str.length() != this.length()){
+            isEqual = false;
         }
+        else{
+            for(int i = 0; i < str.length(); i++){
+                if(this.toCharArray()[i] != str.toCharArray()[i]){
+                    isEqual = false;
+                }
+            }
+        }
+        return isEqual;
+    }
 
+    //done
+    public boolean equalsIgnoreCase(MyString str){
+        return this.toLowerCase().equals(str.toLowerCase());
+    }
+
+    public boolean startsWith(MyString str){
+        char[] target = str.toCharArray();
+
+        boolean toReturn = true;
+        for(int i = 0; i < target.length; i++){
+            if(target[i] != charArr[i]){
+                toReturn = false;
+            }
+        }
         return toReturn;
     }
 
-    public boolean equals(MyString str){
-
-        return true;
-    }
-
-    public boolean equalsIgnoreCase(MyString str){
-
-        return true;
-    }
-
-    public boolean startswith(MyString str){
-
-        return true;
-    }
-
     public boolean endsWith(MyString str){
+        char[] target = str.toCharArray();
 
-        return true;
+        boolean toReturn = true;
+        for(int i = 0; i < target.length; i++){
+            if(target[i] != charArr[i + charArr.length - target.length]){
+                toReturn = false;
+            }
+        }
+        return toReturn;
     }
 
     public boolean contains(MyString str){
+        boolean toReturn = false;
 
-        return true;
+        for(int i = 0; i < this.length() - str.length(); i++){
+            if(this.substring(i).startsWith(str)){
+                toReturn = true;
+            }
+        }
+        return toReturn;
     }
 
     public int indexOf(MyString str){
-
-        return 0;
+        int returnIndex = 0;
+        while(!this.substring(returnIndex).startsWith(str)){
+            returnIndex++;
+        }
+        return returnIndex;
     }
 
+    //done
     public int length(){
 
-        return 0;
+        return charArr.length;
     }
 
+    //done
     public MyString substring(int index1, int index2){
+        char[] subArr = new char[index2 - index1];
 
-        return new MyString();
+        for(int i = index1; i < index2; i++){
+            subArr[i - index1] = charArr[i];
+        }
+
+        return new MyString(subArr);
     }
 
+    //done
     public MyString substring(int index1){
+        char[] subArr = new char[charArr.length - index1];
 
-        return new MyString();
+        for(int i = index1; i < charArr.length; i++){
+            subArr[i - index1] = charArr[i];
+        }
+
+        return new MyString(subArr);
     }
 
+    //done
     public MyString toLowerCase(){
-
-        return new MyString();
+        char[] lowerChars = this.toCharArray();
+        for(int i = 0; i < lowerChars.length; i++){
+            if('A' < lowerChars[i] && lowerChars[i] <= 'Z'){
+                lowerChars[i] += 'a' - 'A';
+            }
+        }
+        return new MyString(lowerChars);
     }
 
+    // done
     public MyString toUpperCase(){
-
-        return new MyString();
+        char[] upperChars = this.toCharArray();
+        for(int i = 0; i < upperChars.length; i++){
+            if('a' <= upperChars[i] && upperChars[i] <= 'z'){
+                upperChars[i] -= 'a' - 'A';
+            }
+        }
+        return new MyString(upperChars);
     }
 }
