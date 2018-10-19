@@ -60,6 +60,21 @@ class StringTestor{
             }
         }
 
+
+        System.out.println("equalsIgnoreCase() test");
+        System.out.println("String(random String) : " + input.equalsIgnoreCase("klaj;sdfjklfds afjsdk"));
+        System.out.println("MyString(random String) : " + myString.equalsIgnoreCase(new MyString("klaj;sdfjklfds afjsdk")));
+        if(input.equalsIgnoreCase("klaj;sdfjklfds afjsdk") != myString.equalsIgnoreCase(new MyString("klaj;sdfjklfds afjsdk"))){
+            passed = false;
+        }
+        System.out.println("String(equal String) : " + input.equalsIgnoreCase(new String(input.toCharArray()).toLowerCase()));
+        System.out.println("MyString(equal String) : " + myString.equalsIgnoreCase(new MyString(input.toCharArray()).toLowerCase()));
+        System.out.println();
+        if(input.equalsIgnoreCase(new String(input.toCharArray()).toLowerCase()) != myString.equalsIgnoreCase(new MyString(input.toCharArray()).toLowerCase())){
+            passed = false;
+        }
+
+        
         return passed;
     }
 }
