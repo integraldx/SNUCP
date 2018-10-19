@@ -1,3 +1,5 @@
+import java.sql.Time;
+import java.util.*;
 
 class StringTestor{
     public static void main(String[] args){
@@ -15,6 +17,8 @@ class StringTestor{
     public static boolean examineMyString(String input){
         MyString myString = new MyString(input.toCharArray());
         boolean passed = true;
+
+        Random random = new Random(System.currentTimeMillis());
         System.out.println("Input String : " + input + "\n");
 
         System.out.println("toCharArray() test");
@@ -74,6 +78,14 @@ class StringTestor{
             passed = false;
         }
 
+        int start = random.nextInt(input.length());
+        int end = random.nextInt(input.length() - start) + start;
+        System.out.println("substring(" + start + ", " + end + ") test");
+        System.out.println("String : " + input.substring(start, end));
+        System.out.println("MyString : " + new String(myString.substring(start, end).toCharArray()));
+        if(!input.substring(start, end).equals(new String(myString.substring(start, end).toCharArray()))){
+            passed = false;
+        }
         
         return passed;
     }

@@ -14,10 +14,12 @@ class MyString {
         charArr = chars.clone();
     }
 
+    //done
     public char[] toCharArray(){
         return charArr.clone();
     }
 
+    //done
     public boolean equals(MyString str){
         boolean isEqual = true;
         if(str.length() != this.length()){
@@ -33,6 +35,7 @@ class MyString {
         return isEqual;
     }
 
+    //done
     public boolean equalsIgnoreCase(MyString str){
         return this.toLowerCase().equals(str.toLowerCase());
     }
@@ -57,14 +60,20 @@ class MyString {
         return 0;
     }
 
+    //done
     public int length(){
 
         return charArr.length;
     }
 
     public MyString substring(int index1, int index2){
+        char[] subArr = new char[index2 - index1];
 
-        return new MyString();
+        for(int i = index1; i < index2; i++){
+            subArr[i - index1] = charArr[i];
+        }
+
+        return new MyString(subArr);
     }
 
     public MyString substring(int index1){
@@ -72,6 +81,7 @@ class MyString {
         return new MyString();
     }
 
+    //done
     public MyString toLowerCase(){
         char[] lowerChars = this.toCharArray();
         for(int i = 0; i < lowerChars.length; i++){
@@ -82,6 +92,7 @@ class MyString {
         return new MyString(lowerChars);
     }
 
+    // done
     public MyString toUpperCase(){
         char[] upperChars = this.toCharArray();
         for(int i = 0; i < upperChars.length; i++){
