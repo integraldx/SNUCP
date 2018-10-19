@@ -76,8 +76,11 @@ class MyString {
     }
 
     public int indexOf(MyString str){
-
-        return 0;
+        int returnIndex = 0;
+        while(!this.substring(returnIndex).startsWith(str)){
+            returnIndex++;
+        }
+        return returnIndex;
     }
 
     //done

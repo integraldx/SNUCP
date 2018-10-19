@@ -139,6 +139,16 @@ class StringTestor{
         if(input.contains("\\/,3") != myString.contains(new MyString("\\/,3".toCharArray()))){
             passed = false;
         }
+
+        start = random.nextInt(input.length());
+        System.out.println("indexOf(" + start + ") test");
+        System.out.println("String " + input.indexOf(input.substring(start)));
+        System.out.println("MyString " + myString.indexOf(myString.substring(start)));
+        System.out.println();
+        if(input.indexOf(input.substring(start)) != myString.indexOf(myString.substring(start))){
+            passed = false;
+        }
+        
         return passed;
     }
 }
