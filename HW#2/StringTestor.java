@@ -125,6 +125,20 @@ class StringTestor{
             passed = false;
         }
 
+        start = random.nextInt(input.length());
+        end = random.nextInt(input.length() - start) + start;
+        System.out.println("contains() test");
+        System.out.println("String(contains)    : " + input.contains(input.substring(start, end)));
+        System.out.println("MyString(contains)  : " + myString.contains(myString.substring(start, end)));
+        if(input.contains(input.substring(start, end)) != myString.contains(myString.substring(start, end))){
+            passed = false;
+        }
+        System.out.println("String(doesnot)    :" + input.contains("\\/,3"));
+        System.out.println("MyString(doesnot)  :" + myString.contains(new MyString("\\/,3".toCharArray())));
+        System.out.println();
+        if(input.contains("\\/,3") != myString.contains(new MyString("\\/,3".toCharArray()))){
+            passed = false;
+        }
         return passed;
     }
 }

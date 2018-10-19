@@ -65,8 +65,14 @@ class MyString {
     }
 
     public boolean contains(MyString str){
+        boolean toReturn = false;
 
-        return true;
+        for(int i = 0; i < this.length() - str.length(); i++){
+            if(this.substring(i).startsWith(str)){
+                toReturn = true;
+            }
+        }
+        return toReturn;
     }
 
     public int indexOf(MyString str){
