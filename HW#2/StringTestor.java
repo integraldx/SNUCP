@@ -83,10 +83,19 @@ class StringTestor{
         System.out.println("substring(" + start + ", " + end + ") test");
         System.out.println("String : " + input.substring(start, end));
         System.out.println("MyString : " + new String(myString.substring(start, end).toCharArray()));
+        System.out.println();
         if(!input.substring(start, end).equals(new String(myString.substring(start, end).toCharArray()))){
             passed = false;
         }
         
+        start = random.nextInt(input.length());
+        System.out.println("substring(" + start + ") test");
+        System.out.println("String : " + input.substring(start));
+        System.out.println("MyString : " + new String(myString.substring(start).toCharArray()));
+        System.out.println();
+        if(!input.substring(start).equals(new String(myString.substring(start).toCharArray()))){
+            passed = false;
+        }
         return passed;
     }
 }

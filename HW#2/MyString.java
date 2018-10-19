@@ -66,6 +66,7 @@ class MyString {
         return charArr.length;
     }
 
+    //done
     public MyString substring(int index1, int index2){
         char[] subArr = new char[index2 - index1];
 
@@ -77,8 +78,13 @@ class MyString {
     }
 
     public MyString substring(int index1){
+        char[] subArr = new char[charArr.length - index1];
 
-        return new MyString();
+        for(int i = index1; i < charArr.length; i++){
+            subArr[i - index1] = charArr[i];
+        }
+
+        return new MyString(subArr);
     }
 
     //done
