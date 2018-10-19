@@ -53,8 +53,15 @@ class MyString {
     }
 
     public boolean endsWith(MyString str){
+        char[] target = str.toCharArray();
 
-        return true;
+        boolean toReturn = true;
+        for(int i = 0; i < target.length; i++){
+            if(target[i] != charArr[i + charArr.length - target.length]){
+                toReturn = false;
+            }
+        }
+        return toReturn;
     }
 
     public boolean contains(MyString str){
