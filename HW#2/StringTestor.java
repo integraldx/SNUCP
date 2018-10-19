@@ -96,6 +96,21 @@ class StringTestor{
         if(!input.substring(start).equals(new String(myString.substring(start).toCharArray()))){
             passed = false;
         }
+
+        end = random.nextInt(input.length());
+        System.out.println("startswith() test");
+        System.out.println("String(equal) : " + input.startsWith(input.substring(0, end)));
+        System.out.println("MyString(equal) " + myString.startsWith(myString.substring(0, end)));
+        if(input.startsWith(input.substring(0, end)) != myString.startsWith(myString.substring(0, end))){
+            passed = false;
+        }
+        System.out.println();
+        System.out.println("String(inequal) : " + input.startsWith("=-/v."));
+        System.out.println("MyString(inequal) : " + myString.startsWith(new MyString("=-/v.".toCharArray())));
+        if(input.startsWith("=-/v.") != myString.startsWith(new MyString("=-/v."))){
+            passed = false;
+        }
+
         return passed;
     }
 }

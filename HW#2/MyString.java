@@ -40,9 +40,16 @@ class MyString {
         return this.toLowerCase().equals(str.toLowerCase());
     }
 
-    public boolean startswith(MyString str){
+    public boolean startsWith(MyString str){
+        char[] target = str.toCharArray();
 
-        return true;
+        boolean toReturn = true;
+        for(int i = 0; i < target.length; i++){
+            if(target[i] != charArr[i]){
+                toReturn = false;
+            }
+        }
+        return toReturn;
     }
 
     public boolean endsWith(MyString str){
@@ -77,6 +84,7 @@ class MyString {
         return new MyString(subArr);
     }
 
+    //done
     public MyString substring(int index1){
         char[] subArr = new char[charArr.length - index1];
 
