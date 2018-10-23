@@ -34,6 +34,8 @@ class StringTestor{
         System.out.println("equals() test");
         System.out.println("String(random String)    : " + input.equals("klaj;sdfjklfds afjsdk"));
         System.out.println("MyString(random String)  : " + myString.equals(new MyString("klaj;sdfjklfds afjsdk")));
+        System.out.println("String(random Object)    : " + input.equals(new Object()));
+        System.out.println("MyString(random Object)  : " + myString.equals(new Object()));
         if(input.equals("klaj;sdfjklfds afjsdk") != myString.equals(new MyString("klaj;sdfjklfds afjsdk"))){
             passed = false;
         }

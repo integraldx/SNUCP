@@ -35,6 +35,14 @@ class MyString {
         return isEqual;
     }
 
+    public boolean equals(Object o){
+        if(o instanceof MyString){
+            return equals((MyString) o);
+        }
+        else {
+            return false; 
+        }
+    }
     //done
     public boolean equalsIgnoreCase(MyString str){
         return this.toLowerCase().equals(str.toLowerCase());
