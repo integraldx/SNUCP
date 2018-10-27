@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 class TTT_3D {
     static TTTGame game = new TTTGame();
@@ -41,7 +42,7 @@ class TTT_3D {
                 continue;
             }
 
-            switch(game.evaluateGameState(z, y, z)){
+            switch(game.evaluateGameState(z, y, x)){
                 case X:
                     printGameBoard();
                     System.out.println("Player 1 win!");
@@ -154,10 +155,13 @@ class TTTGame {
         boolean isWin = false;
 
         // place for evaluation code
-        //
-        //
-        //
-        
+        try{
+        isWin = sideCheck(z, y, x) || cornerCheck(z, y, x);
+        }
+        catch(Exception e){
+
+        }
+
         if (counter == 26 && !isWin){
             gameState = GameState.S;
         }
@@ -172,6 +176,136 @@ class TTTGame {
         return gameState;
     }
 
+    private boolean sideCheck(int z, int y, int x) throws FileNotFoundException{
+        var toCheck = gameBoard[z][y][x];
+
+        int counter = 0;
+        for(int i = 0; i < 3; i++){
+            if(gameBoard[z][y][i] == toCheck){
+                counter++;
+            }
+            
+        }
+        if (counter == 3){
+            PrintStream log = new PrintStream(new File("log.txt"));
+            log.println(z + ", " + y + ", n " + "completed");
+            log.close();
+            return true;
+        }
+        
+        counter = 0;
+        for(int i = 0; i < 3; i++){
+            if(gameBoard[z][i][x] == toCheck){
+                counter++;
+            }
+        }
+        if(counter == 3){
+            PrintStream log = new PrintStream(new File("log.txt"));
+            log.println(z + ", n" + ", " + x + "completed");
+            log.close();
+            return true;
+        }
+
+        counter = 0;
+        for(int i = 0; i < 3; i++){
+            if(gameBoard[i][y][x] == toCheck){
+                 counter++;
+            }
+        }
+        if(counter == 3){
+            PrintStream log = new PrintStream(new File("log.txt"));
+            log.println("n" + ", " + y + ", " + x + "completed");
+            log.close();
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean cornerCheck(int z, int y, int x) throws FileNotFoundException{
+        var toCheck = gameBoard[z][y][x];
+        if((z == 0) || (z == 2)){
+            if(y == z){
+                int counter = 0;
+                for(int i = 0; i < 3; i++){
+                    if(gameBoard[i][i][x] == toCheck){
+                        counter++;
+                    }
+                }
+                if(counter == 3){
+                    PrintStream log = new PrintStream(new File("log.txt"));
+                    log.println("n, n, " + x + "completed");
+                    log.close();
+                    return true;
+                }
+            }
+            else {
+                int counter = 0;
+                for(int i = 0; i < 3; i++){
+                    if(gameBoard[i][2 - i][x] == toCheck){
+                        counter++;
+                    }
+                }
+                if(counter == 3){
+                    PrintStream log = new PrintStream(new File("log.txt"));
+                    log.println(z + ", " + y + ", n " + "completed");
+                    log.close();
+                    return true;
+                }
+            }
+
+            if(x == z){
+                int counter = 0;
+                for(int i = 0; i < 3; i++){
+                    if(gameBoard[i][y][i] == toCheck){
+                        counter++;
+                    }
+                }
+
+                if(counter == 3){
+                    return true;
+                }
+            }
+            else {
+                int counter = 0;
+                for(int i = 0; i < 3; i++){
+                    if(gameBoard[i][y][2 - i] == toCheck){
+                        counter++;
+                    }
+                }
+
+                if(counter == 3){
+                    return true;
+                }
+            }
+            if(x == y){
+                int counter = 0;
+                for(int i = 0; i < 3; i++){
+                    if(gameBoard[z][i][i] == toCheck){
+                        counter++;
+                    }
+                }
+                
+                if(counter == 3){
+                    return true;
+                }
+            }
+            else {
+                int counter = 0;
+                for(int i = 0; i < 3; i++){
+                    if(gameBoard[z][i][2 - i] == toCheck){
+                        counter++;
+                    }
+                }
+
+                if(counter == 3){
+                    return true;
+                }
+            }
+            
+        }
+        return false;
+    }
     public PlayerState getCurrentPlayerState(){
         return playerState;
     }
