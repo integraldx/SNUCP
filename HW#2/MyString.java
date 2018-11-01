@@ -7,9 +7,6 @@ class MyString {
         charArr = new char[0];
     }
 
-    public MyString(String str){
-        charArr = str.toCharArray();
-    }
     public MyString(char[] chars){
         charArr = chars.clone();
     }
@@ -19,8 +16,25 @@ class MyString {
         return charArr.clone();
     }
 
+
+    @Override
+    public boolean equals(Object o){
+        if(o == null){
+            return false;
+        }
+        if(o instanceof MyString){
+            return equals((MyString) o);
+        }
+        else {
+            return false; 
+        }
+    }
+
     //done
     public boolean equals(MyString str){
+        if(str == null){
+            return false;
+        }
         boolean isEqual = true;
         if(str.length() != this.length()){
             isEqual = false;
@@ -35,16 +49,11 @@ class MyString {
         return isEqual;
     }
 
-    public boolean equals(Object o){
-        if(o instanceof MyString){
-            return equals((MyString) o);
-        }
-        else {
-            return false; 
-        }
-    }
     //done
     public boolean equalsIgnoreCase(MyString str){
+        if(str == null){
+            return false;
+        }
         return this.toLowerCase().equals(str.toLowerCase());
     }
 
@@ -52,6 +61,10 @@ class MyString {
         char[] target = str.toCharArray();
 
         boolean toReturn = true;
+
+        if(target.length > this.length()){
+            return false;
+        }
         for(int i = 0; i < target.length; i++){
             if(target[i] != charArr[i]){
                 toReturn = false;
@@ -62,7 +75,9 @@ class MyString {
 
     public boolean endsWith(MyString str){
         char[] target = str.toCharArray();
-
+        if(this.length() < str.length()){
+            return false;
+        }
         boolean toReturn = true;
         for(int i = 0; i < target.length; i++){
             if(target[i] != charArr[i + charArr.length - target.length]){
@@ -75,7 +90,7 @@ class MyString {
     public boolean contains(MyString str){
         boolean toReturn = false;
 
-        for(int i = 0; i < this.length() - str.length(); i++){
+        for(int i = 0; i < this.length() - str.length() + 1; i++){
             if(this.substring(i).startsWith(str)){
                 toReturn = true;
             }
@@ -85,15 +100,21 @@ class MyString {
 
     public int indexOf(MyString str){
         int returnIndex = 0;
-        while(!this.substring(returnIndex).startsWith(str)){
-            returnIndex++;
+        while(true){
+            if(this.substring(returnIndex).startsWith(str)){
+                return returnIndex;
+            }
+            else {
+                returnIndex++;
+                if(returnIndex >= this.length()){
+                    return -1;
+                }
+            }
         }
-        return returnIndex;
     }
 
     //done
     public int length(){
-
         return charArr.length;
     }
 
