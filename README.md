@@ -16,4 +16,4 @@ Austraillian Open과 US Open 의 규칙이 다르고, Male과 Female의 규칙�
 ### 1. MyString
 Java의 String을 implement하는 클래스. 
 ### 2. TTT_3D
-TicTacToe 게임을 3차원 보드로 옮긴 프로그램. 무려 **무승부** 를 구현해야 한다. 아 머리 깨지겄다
+TicTacToe 게임을 3차원 보드로 옮긴 프로그램. 무승부는 이론상 존재할 수 없다. 판을 뒤엎는다면 모를까..
