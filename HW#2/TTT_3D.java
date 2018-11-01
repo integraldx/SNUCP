@@ -12,33 +12,37 @@ class TTT_3D {
             System.out.print("Enter Input for Player " + game.getCurrentPlayerState().toString() + ": ");
             String input = scanner.nextLine();
             String[] inputSplit = input.split(" ");
-
+            if(inputSplit.length != 3){
+                invalidInputPrint();
+                continue;
+            }
             int x, y, z;
+            try{
+                y = 3 - Integer.parseInt(inputSplit[2]);
+                x = Integer.parseInt(inputSplit[1]) - 1;
+            }
+            catch(NumberFormatException e){
+                invalidInputPrint();
+                continue;
+            }
             if(inputSplit[0].equals("T")){
-                y = Integer.parseInt(inputSplit[1]);
-                x = Integer.parseInt(inputSplit[2]);
                 z = 0;
-
             }
             else if (inputSplit[0].equals("M")){
-                y = Integer.parseInt(inputSplit[1]);
-                x = Integer.parseInt(inputSplit[2]);
                 z = 1;
 
             }
             else if (inputSplit[0].equals("B")){
-                y = Integer.parseInt(inputSplit[1]);
-                x = Integer.parseInt(inputSplit[2]);
                 z = 2;
 
             }
             else {
-                System.out.println("Invailid Input!");
+                invalidInputPrint();
                 continue;
             }
 
             if(x < 0 || x > 2 || y < 0 || y > 2 || !game.tryAssignPlayerToken(z, y, x)){
-                System.out.println("Invalid Input!");
+                invalidInputPrint();
                 continue;
             }
 
@@ -59,6 +63,10 @@ class TTT_3D {
                     continue;
             }
         }
+    }
+
+    public static void invalidInputPrint(){
+        System.out.println("Invalid Input! Try again.");
     }
     
     public static void printGameBoard(){
@@ -134,8 +142,6 @@ class TTTGame {
                 counter++;
                 break;
         }
-
-
         return true;
     }
 
@@ -155,12 +161,7 @@ class TTTGame {
         boolean isWin = false;
 
         // place for evaluation code
-        try{
         isWin = sideCheck(z, y, x) || cornerCheck(z, y, x);
-        }
-        catch(Exception e){
-
-        }
 
         if (counter == 26 && !isWin){
             gameState = GameState.S;
@@ -176,7 +177,7 @@ class TTTGame {
         return gameState;
     }
 
-    private boolean sideCheck(int z, int y, int x) throws FileNotFoundException{
+    private boolean sideCheck(int z, int y, int x) {
         var toCheck = gameBoard[z][y][x];
 
         int counter = 0;
@@ -187,9 +188,6 @@ class TTTGame {
             
         }
         if (counter == 3){
-            PrintStream log = new PrintStream(new File("log.txt"));
-            log.println(z + ", " + y + ", n " + "completed");
-            log.close();
             return true;
         }
         
@@ -200,9 +198,6 @@ class TTTGame {
             }
         }
         if(counter == 3){
-            PrintStream log = new PrintStream(new File("log.txt"));
-            log.println(z + ", n" + ", " + x + "completed");
-            log.close();
             return true;
         }
 
@@ -213,16 +208,13 @@ class TTTGame {
             }
         }
         if(counter == 3){
-            PrintStream log = new PrintStream(new File("log.txt"));
-            log.println("n" + ", " + y + ", " + x + "completed");
-            log.close();
             return true;
         }
 
         return false;
     }
 
-    private boolean cornerCheck(int z, int y, int x) throws FileNotFoundException{
+    private boolean cornerCheck(int z, int y, int x) {
         var toCheck = gameBoard[z][y][x];
         {
             int counter = 0;
@@ -232,9 +224,6 @@ class TTTGame {
                 }
             }
             if(counter == 3){
-                PrintStream log = new PrintStream(new File("log.txt"));
-                log.println("n, n, " + x + "completed");
-                log.close();
                 return true;
             }
         }
@@ -246,9 +235,6 @@ class TTTGame {
                 }
             }
             if(counter == 3){
-                PrintStream log = new PrintStream(new File("log.txt"));
-                log.println(z + ", " + y + ", n " + "completed");
-                log.close();
                 return true;
             }
         }
@@ -304,6 +290,7 @@ class TTTGame {
             
         return false;
     }
+
     public PlayerState getCurrentPlayerState(){
         return playerState;
     }
