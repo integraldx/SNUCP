@@ -20,4 +20,4 @@ TicTacToe 게임을 3차원 보드로 옮긴 프로그램. 무승부는 이론�
 
 ## #3
 ### 1. LinkedBinarySearchTree
-Binary Search 가 가능한 Linked List 비슷한 걸 구현한 
+Binary Search 가 가능한 Linked List 비슷한 걸 구현한 클래스.
