@@ -43,29 +43,133 @@ class LinkedBinarySearchTree {
         }
     }
 
-    // public void remove(int num) {
+    public void remove(int num) {
+        if(root != null){
+            if(root.val == num){
+                LBST_Node replace;
+                if(root.r_child != null){
+                    replace = root.r_child.getMostLeftNode();
+                    root.r_child.removeMostLeftNode();
+                }
+                else if (root.l_child != null) {
+                    replace = root.l_child.getMostRightNode();
+                    root.l_child.removeMostRightNode();
+                }
+                else {
+                    elementCounter--;
+                    root = null;
+                    first = null;
+                    return;
+                }
+                root.val = replace.val;
+            }
+            else {
+                recursiveRemove(root, num);
+            }
 
-    // }
+            root.inorderLinkResolve(null);
+            first = root.getMostLeftNode();
+            elementCounter--;
+        }
 
-    // private void recursiveRemove(LBST_Node node, int value){
+    }
 
-    // }
+    private void recursiveRemove(LBST_Node node, int value){
+        if(value < node.val){
+            if (node.l_child != null) {
+                if (value == node.l_child.val) {
+                    var toRemove = node.l_child;
+                    LBST_Node replace;
+                    if(toRemove.r_child != null){
+                        replace = toRemove.r_child.getMostLeftNode();
+                        if(toRemove.r_child.r_child == null){
+                            toRemove.r_child = null;
+                        }
+                        else {
+                            toRemove.r_child.removeMostLeftNode();
+                        }
+                    }
+                    else if (toRemove.l_child != null){
+                        replace = toRemove.l_child.getMostRightNode();
+                        if(toRemove.r_child.r_child == null){
+                            toRemove.r_child = null;
+                        }
+                        else {
+                            toRemove.r_child.removeMostLeftNode();
+                        }
+                    }
+                    else {
+                        node.l_child = null;
+                        return;
+                    }
 
-    // public boolean search(int num) {
+                    toRemove.val = replace.val;
+                    return;
+                } 
+                else {
+                    recursiveRemove(node.l_child, value);
+                }
+            }
+        }
+        else if (node.val < value){
+            if (node.r_child != null) {
+                if (value == node.r_child.val) {
+                    var toRemove = node.r_child;
+                    LBST_Node replace;
+                    if(toRemove.r_child != null){
+                        replace = toRemove.r_child.getMostLeftNode();
+                        if(toRemove.r_child.r_child == null){
+                            toRemove.r_child = null;
+                        }
+                        else {
+                            toRemove.r_child.removeMostLeftNode();
+                        }
+                    }
+                    else if (toRemove.l_child != null){
+                        replace = toRemove.l_child.getMostRightNode();
+                        if(toRemove.l_child.l_child == null){
+                            toRemove.l_child = null;
+                        }
+                        else {
+                            toRemove.l_child.removeMostRightNode();
+                        }
+                    }
+                    else {
+                        node.r_child = null;
+                        return;
+                    }
 
-    // }
+                    toRemove.val = replace.val;
+                    return;
+                } 
+                else {
+                    recursiveRemove(node.r_child, value);
+                }
+            }
 
-    // private boolean recursiveSearch(int value) {
+        }
 
-    // }
+    }
 
-    // public boolean range_search(int left_val, int right_val, int num) {
+    public boolean search(int num) {
+        return true;
 
-    // }
+    }
 
-    // private boolean scan(LBST_Node leftBound, LBST_Node rightBound, int target){
+    private boolean recursiveSearch(int value) {
+        return true;
 
-    // }
+    }
+
+    public boolean range_search(int left_val, int right_val, int num) {
+        return true;
+
+    }
+
+    private boolean scan(LBST_Node leftBound, LBST_Node rightBound, int target){
+        return true;
+
+    }
 
     public LBST_Node[] list() {
         if(elementCounter == 0){

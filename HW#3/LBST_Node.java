@@ -23,7 +23,6 @@ class LBST_Node {
     }
 
     public LBST_Node inorderLinkResolve(LBST_Node prev){
-        LBST_Node internalPrevNode = prev;
         if(l_child != null){
             prev = l_child.inorderLinkResolve(prev);
         }
@@ -53,6 +52,30 @@ class LBST_Node {
         }
         else {
             return this;
+        }
+    }
+
+    public void removeMostLeftNode(){
+        if(l_child != null){
+            if(l_child.l_child != null){
+                l_child.removeMostLeftNode();
+            }
+            else {
+                l_child = null;
+                return;
+            }
+        }
+    }
+
+    public void removeMostRightNode(){
+        if(r_child != null){
+            if(r_child.r_child != null){
+                r_child.removeMostRightNode();
+            }
+            else {
+                r_child = null;
+                return;
+            }
         }
     }
 }

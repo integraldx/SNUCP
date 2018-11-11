@@ -6,12 +6,13 @@ class Testor {
         LinkedBinarySearchTree tree = new LinkedBinarySearchTree();
         while(true){
             String command;
-            int value = 0;
+            int[] arguments = new int[3];
             if(scanner.hasNextLine()){
                 Scanner line = new Scanner(scanner.nextLine());
                 command = line.next();
-                if(line.hasNextInt()){
-                    value = line.nextInt();
+                int counter = 0;
+                while(line.hasNextInt()){
+                    arguments[counter] = line.nextInt();
                 }
             }
             else {
@@ -19,7 +20,7 @@ class Testor {
             }
             switch(command){
             case "insert":
-                tree.insert(value);
+                tree.insert(arguments[0]);
                 break;
             case "list":
                 var list = tree.list();
@@ -28,6 +29,18 @@ class Testor {
                 }
                 System.out.println();
                 break;
+            case "remove":
+                tree.remove(arguments[0]);
+                break;
+            case "search":
+                System.out.println(tree.search(arguments[0]));
+                break;
+            case "range_search":
+                System.out.println(tree.range_search(arguments[0], arguments[1], arguments[2]));
+                break;
+            case "quit":
+            case "exit":
+                return;
             }
 
         }
