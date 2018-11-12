@@ -183,12 +183,73 @@ class LinkedBinarySearchTree {
     }
 
     public boolean range_search(int left_val, int right_val, int num) {
-        return true;
+        if(root == null){
+            return false;
+        }
+        else {
+            if(num < left_val || right_val < num){
+                return false;
+            }
+            LBST_Node leftBound = leftBound(root, left_val);
+            LBST_Node rightBound = rightBound(root, right_val);
+
+            return scan(leftBound, rightBound, num);
+        }
+    
+
+
+    }
+
+    private LBST_Node leftBound(LBST_Node node, int left_val){
+        if(node.val == left_val){
+            return node;
+        }
+        else {
+            if (node.l_child != null) {
+                if (node.l_child.val < left_val) {
+                    return node;
+                } else {
+                    return leftBound(node.l_child, left_val);
+                }
+            } 
+            else {
+                return node;
+            }
+        }
+    }
+
+    private LBST_Node rightBound(LBST_Node node, int right_val){
+        if(node.val == right_val){
+            return node;
+        }
+        else {
+            if (node.r_child != null) {
+                if (right_val < node.r_child.val) {
+                    return node;
+                }
+                else {
+                    return rightBound(node.r_child, right_val);
+                }
+            }
+            else {
+                return node;
+            }
+        }
 
     }
 
     private boolean scan(LBST_Node leftBound, LBST_Node rightBound, int target){
-        return true;
+        LBST_Node current = leftBound;
+
+        while(current.val <= rightBound.val && current != null){
+            if(target == current.val){
+                return true;
+            }
+            else {
+                current = current.next;
+            }
+        }
+        return false;
 
     }
 

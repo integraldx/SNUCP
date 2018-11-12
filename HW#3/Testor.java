@@ -13,6 +13,7 @@ class Testor {
                 int counter = 0;
                 while(line.hasNextInt()){
                     arguments[counter] = line.nextInt();
+                    counter++;
                 }
             }
             else {
