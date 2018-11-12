@@ -152,13 +152,34 @@ class LinkedBinarySearchTree {
     }
 
     public boolean search(int num) {
-        return true;
-
+        if(root == null){
+            return false;
+        }
+        else {
+            return recursiveSearch(root, num);
+        }
     }
 
-    private boolean recursiveSearch(int value) {
-        return true;
-
+    private boolean recursiveSearch(LBST_Node node, int value) {
+        if(node.val == value){
+            return true;
+        }
+        else if (value < node.val){
+            if(node.l_child != null){
+                return recursiveSearch(node.l_child, value);
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            if(node.r_child != null) {
+                return recursiveSearch(node.r_child, value);
+            }
+            else {
+                return false;
+            }
+        }
     }
 
     public boolean range_search(int left_val, int right_val, int num) {
