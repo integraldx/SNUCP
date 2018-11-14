@@ -39,6 +39,9 @@ class Testor {
             case "range_search":
                 System.out.println(tree.range_search(arguments[0], arguments[1], arguments[2]));
                 break;
+            case "root":
+                System.out.println(tree.root.val);
+                break;
             case "quit":
             case "exit":
                 return;

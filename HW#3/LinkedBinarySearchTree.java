@@ -2,13 +2,11 @@
 class LinkedBinarySearchTree {
     public LBST_Node root = null;
     public LBST_Node first = null;
-    int elementCounter = 0;
 
     public void insert(int num) {
         if(root == null){
             root = new LBST_Node(num);
             first = root;
-            elementCounter++;
         }
         else {
             recursiveInsertion(root, num);
@@ -24,7 +22,6 @@ class LinkedBinarySearchTree {
         else if (value < node.val) {
             if(node.l_child == null){
                 node.l_child = new LBST_Node(value);
-                elementCounter++;
                 return;
             }
             else {
@@ -34,7 +31,6 @@ class LinkedBinarySearchTree {
         else if (node.val < value){
             if(node.r_child == null){
                 node.r_child = new LBST_Node(value);
-                elementCounter++;
                 return;
             }
             else {
@@ -47,21 +43,36 @@ class LinkedBinarySearchTree {
         if(root != null){
             if(root.val == num){
                 LBST_Node replace;
+                boolean leftChildReplace = false;
+                boolean rightChildReplace = false;
                 if(root.r_child != null){
                     replace = root.r_child.getMostLeftNode();
                     root.r_child.removeMostLeftNode();
+
+                    if(replace == root.r_child){
+                        rightChildReplace = true;
+                    }
                 }
                 else if (root.l_child != null) {
                     replace = root.l_child.getMostRightNode();
                     root.l_child.removeMostRightNode();
+
+                    if(replace == root.l_child){
+                        leftChildReplace = true;
+                    }
                 }
                 else {
-                    elementCounter--;
                     root = null;
                     first = null;
                     return;
                 }
                 root.val = replace.val;
+                if(leftChildReplace) {
+                    root.l_child = replace.l_child;
+                }
+                if(rightChildReplace) {
+                    root.r_child = replace.r_child;
+                }
             }
             else {
                 recursiveRemove(root, num);
@@ -69,7 +80,6 @@ class LinkedBinarySearchTree {
 
             root.inorderLinkResolve(null);
             first = root.getMostLeftNode();
-            elementCounter--;
         }
 
     }
@@ -80,22 +90,20 @@ class LinkedBinarySearchTree {
                 if (value == node.l_child.val) {
                     var toRemove = node.l_child;
                     LBST_Node replace;
+                    boolean leftChildReplace = false;
+                    boolean rightChildReplace = false;
                     if(toRemove.r_child != null){
                         replace = toRemove.r_child.getMostLeftNode();
-                        if(toRemove.r_child.r_child == null){
-                            toRemove.r_child = null;
-                        }
-                        else {
-                            toRemove.r_child.removeMostLeftNode();
+                        toRemove.r_child.removeMostLeftNode();
+                        if(replace == toRemove.r_child){
+                            rightChildReplace = true;
                         }
                     }
                     else if (toRemove.l_child != null){
                         replace = toRemove.l_child.getMostRightNode();
-                        if(toRemove.r_child.r_child == null){
-                            toRemove.r_child = null;
-                        }
-                        else {
-                            toRemove.r_child.removeMostLeftNode();
+                        toRemove.l_child.removeMostRightNode();
+                        if(replace == toRemove.l_child){
+                            leftChildReplace = true;
                         }
                     }
                     else {
@@ -104,6 +112,12 @@ class LinkedBinarySearchTree {
                     }
 
                     toRemove.val = replace.val;
+                    if(leftChildReplace){
+                        toRemove.l_child = replace.l_child;
+                    }
+                    if(rightChildReplace) {
+                        toRemove.r_child = replace.r_child;
+                    }
                     return;
                 } 
                 else {
@@ -116,22 +130,20 @@ class LinkedBinarySearchTree {
                 if (value == node.r_child.val) {
                     var toRemove = node.r_child;
                     LBST_Node replace;
+                    boolean rightChildReplace = false;
+                    boolean leftChildReplace = false;
                     if(toRemove.r_child != null){
                         replace = toRemove.r_child.getMostLeftNode();
-                        if(toRemove.r_child.r_child == null){
-                            toRemove.r_child = null;
-                        }
-                        else {
-                            toRemove.r_child.removeMostLeftNode();
+                        toRemove.r_child.removeMostLeftNode();
+                        if(replace == toRemove.r_child){
+                            rightChildReplace = true;
                         }
                     }
                     else if (toRemove.l_child != null){
                         replace = toRemove.l_child.getMostRightNode();
-                        if(toRemove.l_child.l_child == null){
-                            toRemove.l_child = null;
-                        }
-                        else {
-                            toRemove.l_child.removeMostRightNode();
+                        toRemove.l_child.removeMostRightNode();
+                        if(replace == toRemove.l_child) {
+                            leftChildReplace = true;
                         }
                     }
                     else {
@@ -140,6 +152,12 @@ class LinkedBinarySearchTree {
                     }
 
                     toRemove.val = replace.val;
+                    if(leftChildReplace){
+                        toRemove.l_child = replace.l_child;
+                    }
+                    if(rightChildReplace){
+                        toRemove.r_child = replace.r_child;
+                    }
                     return;
                 } 
                 else {
@@ -254,14 +272,26 @@ class LinkedBinarySearchTree {
     }
 
     public LBST_Node[] list() {
-        if(elementCounter == 0){
+        int count = length();
+        if(count == 0){
             return new LBST_Node[0];
         }
-        LBST_Node[] nodes = new LBST_Node[elementCounter];
+        LBST_Node[] nodes = new LBST_Node[count];
         nodes[0] = first;
-        for(int i = 1; i < elementCounter; i++){
+        for(int i = 1; i < count; i++){
             nodes[i] = nodes[i - 1].next;
         }
         return nodes;
+    }
+
+    public int length(){
+        int count = 0;
+        LBST_Node current = first;
+        while(current != null){
+            count++;
+            current = current.next;
+        }
+
+        return count;
     }
 }
