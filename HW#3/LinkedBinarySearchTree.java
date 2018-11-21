@@ -1,11 +1,11 @@
 
 class LinkedBinarySearchTree {
-    public LBST_Node root = null;
-    public LBST_Node first = null;
+    public LBST_node root = null;
+    public LBST_node first = null;
 
     public void insert(int num) {
         if(root == null){
-            root = new LBST_Node(num);
+            root = new LBST_node(num);
             first = root;
         }
         else {
@@ -15,13 +15,13 @@ class LinkedBinarySearchTree {
         first = root.getMostLeftNode();
     }
 
-    private void recursiveInsertion(LBST_Node node, int value){
+    private void recursiveInsertion(LBST_node node, int value){
         if(node.val == value) {
             return;
         }
         else if (value < node.val) {
             if(node.l_child == null){
-                node.l_child = new LBST_Node(value);
+                node.l_child = new LBST_node(value);
                 return;
             }
             else {
@@ -30,7 +30,7 @@ class LinkedBinarySearchTree {
         }
         else if (node.val < value){
             if(node.r_child == null){
-                node.r_child = new LBST_Node(value);
+                node.r_child = new LBST_node(value);
                 return;
             }
             else {
@@ -42,7 +42,7 @@ class LinkedBinarySearchTree {
     public void remove(int num) {
         if(root != null){
             if(root.val == num){
-                LBST_Node replace;
+                LBST_node replace;
                 boolean leftChildReplace = false;
                 boolean rightChildReplace = false;
                 if(root.r_child != null){
@@ -84,12 +84,12 @@ class LinkedBinarySearchTree {
 
     }
 
-    private void recursiveRemove(LBST_Node node, int value){
+    private void recursiveRemove(LBST_node node, int value){
         if(value < node.val){
             if (node.l_child != null) {
                 if (value == node.l_child.val) {
                     var toRemove = node.l_child;
-                    LBST_Node replace;
+                    LBST_node replace;
                     boolean leftChildReplace = false;
                     boolean rightChildReplace = false;
                     if(toRemove.r_child != null){
@@ -129,7 +129,7 @@ class LinkedBinarySearchTree {
             if (node.r_child != null) {
                 if (value == node.r_child.val) {
                     var toRemove = node.r_child;
-                    LBST_Node replace;
+                    LBST_node replace;
                     boolean rightChildReplace = false;
                     boolean leftChildReplace = false;
                     if(toRemove.r_child != null){
@@ -178,7 +178,7 @@ class LinkedBinarySearchTree {
         }
     }
 
-    private boolean recursiveSearch(LBST_Node node, int value) {
+    private boolean recursiveSearch(LBST_node node, int value) {
         if(node.val == value){
             return true;
         }
@@ -201,24 +201,17 @@ class LinkedBinarySearchTree {
     }
 
     public boolean range_search(int left_val, int right_val, int num) {
-        if(root == null){
-            return false;
-        }
-        else {
-            if(num < left_val || right_val < num){
-                return false;
+        var list = list();
+        for(int i = left_val; i <= right_val; i++){
+            if(list[i].val == num){
+                return true;
             }
-            LBST_Node leftBound = leftBound(root, left_val);
-            LBST_Node rightBound = rightBound(root, right_val);
-
-            return scan(leftBound, rightBound, num);
         }
-    
 
-
+        return false;
     }
 
-    private LBST_Node leftBound(LBST_Node node, int left_val){
+    private LBST_node leftBound(LBST_node node, int left_val){
         if(node.val == left_val){
             return node;
         }
@@ -236,7 +229,7 @@ class LinkedBinarySearchTree {
         }
     }
 
-    private LBST_Node rightBound(LBST_Node node, int right_val){
+    private LBST_node rightBound(LBST_node node, int right_val){
         if(node.val == right_val){
             return node;
         }
@@ -256,8 +249,8 @@ class LinkedBinarySearchTree {
 
     }
 
-    private boolean scan(LBST_Node leftBound, LBST_Node rightBound, int target){
-        LBST_Node current = leftBound;
+    private boolean scan(LBST_node leftBound, LBST_node rightBound, int target){
+        LBST_node current = leftBound;
 
         while(current.val <= rightBound.val && current != null){
             if(target == current.val){
@@ -271,12 +264,12 @@ class LinkedBinarySearchTree {
 
     }
 
-    public LBST_Node[] list() {
+    public LBST_node[] list() {
         int count = length();
         if(count == 0){
-            return new LBST_Node[0];
+            return new LBST_node[0];
         }
-        LBST_Node[] nodes = new LBST_Node[count];
+        LBST_node[] nodes = new LBST_node[count];
         nodes[0] = first;
         for(int i = 1; i < count; i++){
             nodes[i] = nodes[i - 1].next;
@@ -286,7 +279,7 @@ class LinkedBinarySearchTree {
 
     public int length(){
         int count = 0;
-        LBST_Node current = first;
+        LBST_node current = first;
         while(current != null){
             count++;
             current = current.next;

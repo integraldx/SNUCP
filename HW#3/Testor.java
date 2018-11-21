@@ -25,7 +25,7 @@ class Testor {
                 break;
             case "list":
                 var list = tree.list();
-                for(LBST_Node node : list){
+                for(LBST_node node : list){
                     System.out.print(node.val + " ");
                 }
                 System.out.println();

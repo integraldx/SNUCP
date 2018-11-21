@@ -1,28 +1,28 @@
 
-class LBST_Node {
+class LBST_node {
     public int val;
-    public LBST_Node l_child = null;
-    public LBST_Node r_child = null;
-    public LBST_Node next = null;
+    public LBST_node l_child = null;
+    public LBST_node r_child = null;
+    public LBST_node next = null;
 
-    public LBST_Node(int value){
+    public LBST_node(int value){
         val = value;
     }
 
-    public LBST_Node(int value, LBST_Node left, LBST_Node right){
+    public LBST_node(int value, LBST_node left, LBST_node right){
         val = value;
         l_child = left;
         r_child = right;
     }
 
-    public LBST_Node(int value, LBST_Node left, LBST_Node right, LBST_Node next){
+    public LBST_node(int value, LBST_node left, LBST_node right, LBST_node next){
         val = value;
         l_child = left;
         r_child = right;
         this.next = next;
     }
 
-    public LBST_Node inorderLinkResolve(LBST_Node prev){
+    public LBST_node inorderLinkResolve(LBST_node prev){
         if(l_child != null){
             prev = l_child.inorderLinkResolve(prev);
         }
@@ -37,7 +37,7 @@ class LBST_Node {
         return prev;
     }
 
-    public LBST_Node getMostLeftNode(){
+    public LBST_node getMostLeftNode(){
         if(l_child != null){
             return l_child.getMostLeftNode();
         }
@@ -46,7 +46,7 @@ class LBST_Node {
         }
     }
 
-    public LBST_Node getMostRightNode(){
+    public LBST_node getMostRightNode(){
         if(r_child != null) {
             return r_child.getMostRightNode();
         }
