@@ -13,7 +13,7 @@ public class FinalDriver {
         Scanner sc = new Scanner(readfile(input));
         int operandCount = sc.nextInt();
         int operationCount = sc.nextInt();
-
+        StringBuilder outputContent = new StringBuilder();
         Tensor[] operands = new Tensor[operandCount];
         for(int iter = 0; iter < operandCount; iter++) {
             switch(sc.next()) {
@@ -40,10 +40,9 @@ public class FinalDriver {
                 break;
 
             }
-
+            outputContent.append(operands[iter].toString());
         }
 
-        StringBuilder outputContent = new StringBuilder();
 
         for (int iter = 0; iter < operationCount; iter++) {
             int index1 = sc.nextInt();
@@ -51,18 +50,16 @@ public class FinalDriver {
             int index2 = sc.nextInt();
 
             Tensor operand1 = operands[index1 - 1];
-            System.out.println(operand1.toString());
             outputContent.append(operand1.toString());
 
             Tensor operand2 = operands[index2 - 1];
-            System.out.println(operand2.toString());
             outputContent.append(operand2.toString());
             Tensor result;
             switch (operator) {
             case "+":
                 result = operand1.add(operand2);
                 if(result != null) {
-                    outputContent.append(result.toString() + "\n");
+                    outputContent.append(result.toString());
                 }
                 else {
                     outputContent.append("Null return has occured at " + index1 + " " + operator + " " + index2 + "\n");
@@ -73,7 +70,7 @@ public class FinalDriver {
             case "*":
                 result = operand1.multiply(operand2);
                 if(result != null) {
-                    outputContent.append(result.toString() + "\n");
+                    outputContent.append(result.toString());
                 }
                 else {
                     outputContent.append("Null return has occured at " + index1 + operator + index2 + "\n");
@@ -83,7 +80,7 @@ public class FinalDriver {
 
             case "p=":
                 boolean compResult = ((MyVector)operand1).permuteCompare((MyVector)operand2);
-                outputContent.append(compResult + "\n\n");
+                outputContent.append(compResult + "\n");
 
                 break;
 

@@ -9,8 +9,16 @@ public class MyScalar extends Tensor {
     public Tensor add(Tensor t) {
         Tensor toReturn;
         if (t instanceof MyMatrix) {
+            MyMatrix matrix = (MyMatrix)t;
+            MyScalar[][] values = new MyScalar[matrix.getVerticalDimension()][matrix.getHorizontalDimension()];
+            
+            for (int i = 0; i < values.length; i++) {
+                for (int j = 0; j < values[0].length; j++) {
+                    values[i][j] = (MyScalar)this.add(matrix.getScalarAt(i, j));
+                }
+            }
 
-            toReturn = null;
+            toReturn = new MyMatrix(values);
         }
         else if (t instanceof MyVector) {
             MyVector vector = (MyVector)t;
@@ -36,7 +44,16 @@ public class MyScalar extends Tensor {
         Tensor toReturn;
 
         if (t instanceof MyMatrix) {
-            toReturn = null;
+            MyMatrix matrix = (MyMatrix)t;
+            MyScalar[][] values = new MyScalar[matrix.getVerticalDimension()][matrix.getHorizontalDimension()];
+
+            for (int i = 0; i < values.length; i++) {
+                for (int j = 0; j < values[0].length; j++) {
+                    values[i][j] = (MyScalar)this.multiply(matrix.getScalarAt(i, j));
+                }
+            }
+
+            toReturn = new MyMatrix(values);
         }
         else if (t instanceof MyVector) {
             MyVector vector = (MyVector)t;

@@ -55,7 +55,14 @@ public class MyVector extends Tensor {
         Tensor toReturn;
 
         if (t instanceof MyMatrix) {
-            toReturn = null;
+            MyMatrix matrix = (MyMatrix)t;
+            MyVector[] values = new MyVector[matrix.getVerticalDimension()];
+
+            for (int i = 0; i < values.length; i++) {
+                values[i] = (MyVector)this.add(matrix.getRowVectorAt(i));
+            }
+
+            toReturn = new MyMatrix(values, true);
         }
         else if (t instanceof MyVector) {
             MyVector vector = (MyVector)t;
@@ -66,7 +73,7 @@ public class MyVector extends Tensor {
             }
             else {
                 for (int i = 0; i < this.getDimension(); i++) {
-                    value[i] = (MyScalar)this.getScalarAt(i).add(vector.getScalarAt(i));
+                    value[i] = ((MyScalar)this.getScalarAt(i).add(vector.getScalarAt(i))).clone();
                 }
 
                 toReturn = new MyVector(value);
@@ -76,7 +83,7 @@ public class MyVector extends Tensor {
             MyScalar scalar = (MyScalar)t;
             MyScalar[] value = new MyScalar[dimension];
             for(int i = 0; i < value.length; i++) {
-                value[i] = (MyScalar)this.getScalarAt(i).multiply(scalar);
+                value[i] = ((MyScalar)this.getScalarAt(i).multiply(scalar)).clone();
             }
             toReturn = new MyVector(value);
         }
@@ -91,7 +98,14 @@ public class MyVector extends Tensor {
         Tensor toReturn;
 
         if (t instanceof MyMatrix) {
-            toReturn = null;
+            MyMatrix matrix = (MyMatrix)t;
+            MyScalar[] values = new MyScalar[matrix.getHorizontalDimension()];
+
+            for (int i = 0; i < values.length; i++) {
+                values[i] = ((MyScalar)this.multiply(matrix.getColumnVectorAt(i))).clone();
+            }
+
+            toReturn = new MyVector(values);
         }
         else if (t instanceof MyVector) {
             MyVector vector = (MyVector)t;
@@ -101,7 +115,7 @@ public class MyVector extends Tensor {
             }
             else {
                 for (int i = 0; i < this.getDimension(); i++) {
-                    value = (MyScalar)value.add(this.getScalarAt(i).multiply(vector.getScalarAt(i)));
+                    value = ((MyScalar)value.add(this.getScalarAt(i).multiply(vector.getScalarAt(i)))).clone();
                 }
 
                 toReturn = value;
@@ -112,7 +126,7 @@ public class MyVector extends Tensor {
             MyScalar[] value = new MyScalar[this.getDimension()];
 
             for(int i = 0; i < value.length; i++) {
-                value[i] = (MyScalar)scalar.multiply(this.getScalarAt(i));
+                value[i] = ((MyScalar)scalar.multiply(this.getScalarAt(i))).clone();
             }
 
             toReturn = new MyVector(value);
@@ -144,5 +158,15 @@ public class MyVector extends Tensor {
 
     public int getDimension() {
         return dimension;
+    }
+
+    public MyVector clone() {
+        MyScalar[] values = new MyScalar[dimension];
+
+        for (int i = 0; i < dimension; i++) {
+            values[i] = value[i].clone();
+        }
+
+        return new MyVector(values);
     }
 }
