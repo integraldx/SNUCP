@@ -58,6 +58,10 @@ public class MyVector extends Tensor {
             MyMatrix matrix = (MyMatrix)t;
             MyVector[] values = new MyVector[matrix.getVerticalDimension()];
 
+            if (this.getDimension() != matrix.getHorizontalDimension()) {
+                return null;
+            }
+
             for (int i = 0; i < values.length; i++) {
                 values[i] = (MyVector)this.add(matrix.getRowVectorAt(i));
             }
@@ -67,6 +71,7 @@ public class MyVector extends Tensor {
         else if (t instanceof MyVector) {
             MyVector vector = (MyVector)t;
             MyScalar[] value = new MyScalar[this.getDimension()];
+
             
             if(this.getDimension() != vector.getDimension()) {
                 toReturn = null;
@@ -100,6 +105,10 @@ public class MyVector extends Tensor {
         if (t instanceof MyMatrix) {
             MyMatrix matrix = (MyMatrix)t;
             MyScalar[] values = new MyScalar[matrix.getHorizontalDimension()];
+
+            if (this.getDimension() != matrix.getVerticalDimension()) {
+                return null;
+            }
 
             for (int i = 0; i < values.length; i++) {
                 values[i] = ((MyScalar)this.multiply(matrix.getColumnVectorAt(i))).clone();

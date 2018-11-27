@@ -62,6 +62,10 @@ public class MyMatrix extends Tensor {
             MyMatrix matrix = (MyMatrix)t;
             MyVector[] values = new MyVector[rowCount];
 
+            if ((this.columnCount != matrix.columnCount) || (this.rowCount != matrix.rowCount)) {
+                return null;
+            }
+
             for (int i = 0; i < values.length; i++) {
                 values[i] = ((MyVector)this.getRowVectorAt(i).add(matrix.getRowVectorAt(i))).clone();
             }
@@ -71,6 +75,10 @@ public class MyMatrix extends Tensor {
         else if (t instanceof MyVector) {
             MyVector vector = (MyVector)t;
             MyVector[] values = new MyVector[rowCount];
+
+            if (this.columnCount != vector.getDimension()) {
+                return null;
+            }
 
             for (int i = 0; i < values.length; i++) {
                 values[i] = ((MyVector)vector.add(this.getRowVectorAt(i))).clone();
@@ -101,11 +109,15 @@ public class MyMatrix extends Tensor {
         Tensor toReturn;
         if(t instanceof MyMatrix) {
             MyMatrix matrix = (MyMatrix)t;
-            MyScalar[][] values = new MyScalar[this.rowCount][matrix.columnCount];
+            MyScalar[][] values = new MyScalar[this.rowCount][matrix.getHorizontalDimension()];
+
+            if (this.columnCount != matrix.getVerticalDimension()) {
+                return null;
+            }
 
             for (int i = 0; i < values.length; i++) {
                 for (int j = 0; j < values[0].length; j++) {
-                    values[i][j] = ((MyScalar)this.getRowVectorAt(i).multiply(matrix.getColumnVectorAt(j))).clone();
+                    values[i][j] = (MyScalar)this.getRowVectorAt(i).multiply(matrix.getColumnVectorAt(j));
                 }
             }
 
@@ -114,6 +126,10 @@ public class MyMatrix extends Tensor {
         else if (t instanceof MyVector) {
             MyVector vector = (MyVector)t;
             MyScalar[] values = new MyScalar[this.getVerticalDimension()];
+
+            if (this.columnCount != vector.getDimension()) {
+                return null;
+            }
 
             for (int i = 0; i < values.length; i++) {
                 values[i] = ((MyScalar)this.getRowVectorAt(i).multiply(vector)).clone();

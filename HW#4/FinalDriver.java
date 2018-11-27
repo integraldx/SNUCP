@@ -50,10 +50,7 @@ public class FinalDriver {
             int index2 = sc.nextInt();
 
             Tensor operand1 = operands[index1 - 1];
-            outputContent.append(operand1.toString());
-
             Tensor operand2 = operands[index2 - 1];
-            outputContent.append(operand2.toString());
             Tensor result;
             switch (operator) {
             case "+":
@@ -62,7 +59,7 @@ public class FinalDriver {
                     outputContent.append(result.toString());
                 }
                 else {
-                    outputContent.append("Null return has occured at " + index1 + " " + operator + " " + index2 + "\n");
+                    outputContent.append("null\n");
                 }
             
                 break;
@@ -73,7 +70,7 @@ public class FinalDriver {
                     outputContent.append(result.toString());
                 }
                 else {
-                    outputContent.append("Null return has occured at " + index1 + operator + index2 + "\n");
+                    outputContent.append("null\n");
                 }
 
                 break;
