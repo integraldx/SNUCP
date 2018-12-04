@@ -12,6 +12,8 @@ public:
     operator int();
     operator double();
 
+	friend std::ostream& operator <<(std::ostream& os, const cpScalar& sc);
+
 private:
     double value;
 
@@ -45,6 +47,11 @@ cpScalar cpScalar::operator /(cpScalar scalar) {
     return toReturn;
 }
 
+std::ostream& operator<<(std::ostream& os, const cpScalar& sc) {
+	os << sc.value;
+	return os;
+}
+
 cpScalar::operator int() {
-    return value;
+    return (int)value;
 }
