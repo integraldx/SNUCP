@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 
 class cpScalar {
@@ -5,10 +6,10 @@ public:
     cpScalar(int num);
     cpScalar(double num);
 
-    cpScalar operator +(cpScalar scalar);
-    cpScalar operator -(cpScalar scalar);
-    cpScalar operator *(cpScalar scalar);
-    cpScalar operator /(cpScalar scalar);
+    friend cpScalar operator +(cpScalar& left, cpScalar& right);
+    friend cpScalar operator -(cpScalar& left, cpScalar& right);
+    friend cpScalar operator *(cpScalar& left, cpScalar& right);
+    friend cpScalar operator /(cpScalar& left, cpScalar& right);
     operator int();
     operator double();
 
@@ -27,31 +28,35 @@ cpScalar::cpScalar(double num) {
     this->value = num;
 }
 
-cpScalar cpScalar::operator +(cpScalar scalar) {
-    cpScalar toReturn(value + scalar.value);
+cpScalar operator +(cpScalar& left, cpScalar& right) {
+    cpScalar toReturn(left.value + right.value);
     return toReturn;
 } 
 
-cpScalar cpScalar::operator -(cpScalar scalar) {
-    cpScalar toReturn(value - scalar.value);
+cpScalar operator -(cpScalar& left, cpScalar& right) {
+    cpScalar toReturn(left.value - right.value);
     return toReturn;
 }
 
-cpScalar cpScalar::operator *(cpScalar scalar) {
-    cpScalar toReturn(value * scalar.value);
+cpScalar operator *(cpScalar& left, cpScalar& right) {
+    cpScalar toReturn(left.value * right.value);
     return toReturn;
 }
 
-cpScalar cpScalar::operator /(cpScalar scalar) {
-    cpScalar toReturn(value / scalar.value);
+cpScalar operator /(cpScalar& left, cpScalar& right) {
+    cpScalar toReturn(left.value / right.value);
     return toReturn;
 }
 
-std::ostream& operator<<(std::ostream& os, const cpScalar& sc) {
+std::ostream& operator <<(std::ostream& os, const cpScalar& sc) {
 	os << sc.value;
 	return os;
 }
 
 cpScalar::operator int() {
     return (int)value;
+}
+
+cpScalar::operator double() {
+    return value;
 }
