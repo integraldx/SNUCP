@@ -14,6 +14,10 @@ class EvalTree {
     EvalTree(string str);
     ~EvalTree();
 
+    bool evaluate();
+    bool evaluate(int nums[], int size);
+    int getBraketNum();
+
     private:
     Node* root;
     int result;
@@ -27,6 +31,7 @@ EvalTree::EvalTree(string str) {
     result = atoi(resultStr.c_str());
     
     string calc = str.substr(0, wat);
+
     
     if (Node::isThereOperators(calc)) {
         root = new OperatorNode(calc);
@@ -38,4 +43,14 @@ EvalTree::EvalTree(string str) {
 
 EvalTree::~EvalTree() {
     delete root;
+}
+
+bool EvalTree::evaluate() {
+    int calcVal = root->getValue();
+    if(calcVal == result) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }

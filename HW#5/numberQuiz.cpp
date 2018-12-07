@@ -2,8 +2,13 @@
 #include <memory>
 #include "EvalTree.hpp"
 
+using namespace std;
 int main() {
-    EvalTree* evalTree = new EvalTree("3 * 2 = 6");
+    string str;
+    getline(cin, str);
+    EvalTree* evalTree = new EvalTree(str);
+
+    cout << evalTree->evaluate() << endl;
 
     return 0;
 }
