@@ -19,7 +19,7 @@ class Node
 
         return toReturn;
     }
-    virtual int getValue() = 0;
+    virtual double getValue() = 0;
 
   protected:
     Node *left;

@@ -11,7 +11,7 @@ class OperandNode : public Node
     OperandNode(string str);
     ~OperandNode();
 
-    virtual int getValue();
+    virtual double getValue();
 
   private:
     int constant;
@@ -27,7 +27,7 @@ OperandNode::~OperandNode() {
     delete right;
 }
 
-int OperandNode::getValue() 
+double OperandNode::getValue() 
 {
     return constant;
 }

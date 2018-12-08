@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include "Node.hpp"
 #include "OperatorNode.hpp"
 #include "OperandNode.hpp"
@@ -46,8 +47,8 @@ EvalTree::~EvalTree() {
 }
 
 bool EvalTree::evaluate() {
-    int calcVal = root->getValue();
-    if(calcVal == result) {
+    double calcVal = root->getValue();
+    if(abs(calcVal - result) < 0.0005) {
         return true;
     }
     else {
