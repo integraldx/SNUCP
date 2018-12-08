@@ -124,10 +124,14 @@ bool StringNumIterator::isEnd()
 string StringNumIterator::getBoxNumString() {
     string toReturn;
 
-    for (int i = 0; i < boxCount; i++) {
+    for (int i = 0; i < boxCount - 1; i++) {
         toReturn.push_back(boxes[i] + '0');
+        toReturn.push_back(',');
         toReturn.push_back(' ');
     }
+
+    toReturn.push_back(boxes[boxCount - 1] + '0');
+
 
     return toReturn;
 }
