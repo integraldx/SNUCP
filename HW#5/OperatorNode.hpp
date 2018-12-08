@@ -128,6 +128,11 @@ OperatorNode::OperatorNode(string str)
 
 }
 
+OperatorNode::~OperatorNode() {
+    delete left;
+    delete right;
+}
+
 int OperatorNode::getValue()
 {
     int toReturn;

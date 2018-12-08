@@ -14,7 +14,7 @@ class StringNumIterator
     ~StringNumIterator();
     string getNext();
     bool isEnd();
-    int *getBoxNums();
+    string getBoxNumString();
 
   private:
     string orignalString;
@@ -43,7 +43,6 @@ StringNumIterator::StringNumIterator(string str)
         boxes[i] = 0;
     }
 
-    cout << boxCount << endl;
 }
 
 StringNumIterator::~StringNumIterator() {
@@ -116,4 +115,15 @@ bool StringNumIterator::isEnd()
     {
         return false;
     }
+}
+
+string StringNumIterator::getBoxNumString() {
+    string toReturn;
+
+    for (int i = 0; i < boxCount; i++) {
+        toReturn.push_back(boxes[i] + '0');
+        toReturn.push_back(' ');
+    }
+
+    return toReturn;
 }

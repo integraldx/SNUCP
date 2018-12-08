@@ -9,12 +9,12 @@ int main() {
 
     StringNumIterator iter(str);
     while(!iter.isEnd()) {
-        cout << iter.getNext() << endl;
+        EvalTree evalTree(iter.getNext());
+        if(evalTree.evaluate()) {
+            cout << iter.getBoxNumString() << endl;
+        }
     }
 
-    // EvalTree* evalTree = new EvalTree(str);
-
-    // cout << evalTree->evaluate() << endl;
 
     return 0;
 }

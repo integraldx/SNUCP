@@ -22,6 +22,11 @@ OperandNode::OperandNode(string str)
     constant = atoi(str.c_str());
 }
 
+OperandNode::~OperandNode() {
+    delete left;
+    delete right;
+}
+
 int OperandNode::getValue() 
 {
     return constant;
