@@ -107,7 +107,7 @@ string StringNumIterator::getNext()
 
 bool StringNumIterator::isEnd()
 {
-    if (iterationCount == 100)
+    if (iterationCount == integerPow(10, boxCount))
     {
         return true;
     }

@@ -11,7 +11,7 @@ class OperandNode : public Node
     OperandNode(string str);
     ~OperandNode();
 
-    int getValue();
+    virtual int getValue();
 
   private:
     int constant;

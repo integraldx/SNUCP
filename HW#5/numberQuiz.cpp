@@ -8,6 +8,7 @@ int main() {
     getline(cin, str);
 
     StringNumIterator iter(str);
+    
     while(!iter.isEnd()) {
         EvalTree evalTree(iter.getNext());
         if(evalTree.evaluate()) {
