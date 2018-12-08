@@ -19,12 +19,23 @@ class Node
 
         return toReturn;
     }
+
+    virtual ~Node() = 0;
     virtual double getValue() = 0;
 
   protected:
-    Node *left;
-    Node *right;
+    Node *left = nullptr;
+    Node *right = nullptr;
 };
+
+Node::~Node() {
+    if(left != nullptr) {
+        delete left;
+    }
+    if(right != nullptr) {
+        delete right;
+    }
+}
 
 int integerPow(int a, int n) {
     if(n == 1) {

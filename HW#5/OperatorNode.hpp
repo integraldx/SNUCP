@@ -129,8 +129,6 @@ OperatorNode::OperatorNode(string str)
 }
 
 OperatorNode::~OperatorNode() {
-    delete left;
-    delete right;
 }
 
 double OperatorNode::getValue()

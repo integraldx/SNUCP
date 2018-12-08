@@ -28,6 +28,8 @@ int main() {
             cout << iter.getBoxNumString() << endl;
             answerCount++;
         }
+
+        delete evalTree;
     }
 
     if(answerCount == 0) {

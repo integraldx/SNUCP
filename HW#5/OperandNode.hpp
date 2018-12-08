@@ -28,8 +28,6 @@ OperandNode::OperandNode(string str)
 }
 
 OperandNode::~OperandNode() {
-    delete left;
-    delete right;
 }
 
 double OperandNode::getValue() 
