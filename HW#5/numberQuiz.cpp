@@ -15,8 +15,16 @@ int main() {
         if(answerCount == 3) {
             break;
         }
-        EvalTree evalTree(iter.getNext());
-        if(evalTree.evaluate()) {
+
+        EvalTree* evalTree;
+
+        try {
+            evalTree = new EvalTree(iter.getNext());
+        }
+        catch (const char*& ch) {
+            continue;
+        }
+        if(evalTree->evaluate()) {
             cout << iter.getBoxNumString() << endl;
             answerCount++;
         }

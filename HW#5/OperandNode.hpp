@@ -20,6 +20,11 @@ class OperandNode : public Node
 OperandNode::OperandNode(string str)
 {
     constant = atoi(str.c_str());
+
+
+    if(constant == 0 && (str.length() != 1)) {
+        throw "ZERO";
+    }
 }
 
 OperandNode::~OperandNode() {

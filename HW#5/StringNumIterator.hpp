@@ -95,6 +95,10 @@ string StringNumIterator::getNext()
             box = true;
             i++;
         }
+        else if (ch == ' ')
+        {
+            
+        }
         else
         {
             toReturn.push_back(ch);
