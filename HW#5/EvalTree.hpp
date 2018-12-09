@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <math.h>
 #include "Node.hpp"
 #include "OperatorNode.hpp"
 #include "OperandNode.hpp"
