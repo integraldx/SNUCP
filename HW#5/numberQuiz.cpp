@@ -3,21 +3,16 @@
 #include "StringNumIterator.hpp"
 
 using namespace std;
+
 int main() {
     string str;
     getline(cin, str);
-
+    EvalTree *evalTree;
     StringNumIterator iter(str);
 
-    int answerCount = 0;
+    bool isAnswer = false;
 
     while(!iter.isEnd()) {
-        if(answerCount == 3) {
-            break;
-        }
-
-        EvalTree* evalTree;
-
         try {
             evalTree = new EvalTree(iter.getNext());
         }
@@ -26,16 +21,15 @@ int main() {
         }
         if(evalTree->evaluate()) {
             cout << iter.getBoxNumString() << endl;
-            answerCount++;
+            isAnswer = true;
+            break;
         }
 
         delete evalTree;
     }
 
-    if(answerCount == 0) {
+    if(!isAnswer) {
         cout << "No solution" << endl;
     }
-
-
     return 0;
 }

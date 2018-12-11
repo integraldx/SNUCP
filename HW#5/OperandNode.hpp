@@ -25,6 +25,9 @@ OperandNode::OperandNode(string str)
     if(constant == 0 && (str.length() != 1)) {
         throw "ZERO";
     }
+    else if (integerPow(10, str.length() - 1) > constant) {
+        throw "LENGTH MISMATCH";
+    }
 }
 
 OperandNode::~OperandNode() {

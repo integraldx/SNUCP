@@ -49,7 +49,7 @@ EvalTree::~EvalTree() {
 
 bool EvalTree::evaluate() {
     double calcVal = root->getValue();
-    if(abs(calcVal - result) < 0.0005) {
+    if(abs(calcVal - result) < 0.000005) {
         return true;
     }
     else {

@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <memory>
+#include <vector>
 #include "Node.hpp"
 
 using namespace std;
@@ -22,17 +23,28 @@ class StringNumIterator
     char *boxes;
     long long int iterationCount = 0;
 
+    vector<int> seperators;
+
 };
 
 StringNumIterator::StringNumIterator(string str)
 {
     orignalString = str;
+    bool succesive = true;
 
-    for (char ch : str)
-    {
+    for (int i = 0; i < str.length(); i++) {
+        char ch = str[i];
+
         if (ch == '[')
         {
             boxCount++;
+            if (!succesive) {
+                seperators.push_back(boxCount);
+            }
+            succesive = true;
+        }
+        else if (ch != ']') {
+            succesive = false;
         }
     }
 
@@ -123,11 +135,15 @@ bool StringNumIterator::isEnd()
 
 string StringNumIterator::getBoxNumString() {
     string toReturn;
+    int sepCount = 0;
 
     for (int i = 0; i < boxCount - 1; i++) {
         toReturn.push_back(boxes[i] + '0');
-        toReturn.push_back(',');
-        toReturn.push_back(' ');
+        if(seperators[sepCount] - 2 == i) {
+            toReturn.push_back(',');
+            toReturn.push_back(' ');
+            sepCount++;
+        }
     }
 
     toReturn.push_back(boxes[boxCount - 1] + '0');
