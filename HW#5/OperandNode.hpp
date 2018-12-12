@@ -22,11 +22,11 @@ OperandNode::OperandNode(string str)
     constant = atoi(str.c_str());
 
 
-    if(constant == 0 && (str.length() != 1)) {
-        throw "ZERO";
-    }
-    else if (integerPow(10, str.length() - 1) > constant) {
+    if (integerPow(10, str.length() - 1) > constant && constant != 0) {
         throw "LENGTH MISMATCH";
+    }
+    else if(constant == 0 && (str.length() != 1)) {
+        throw "ZERO";
     }
 }
 
