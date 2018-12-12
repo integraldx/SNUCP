@@ -139,7 +139,7 @@ string StringNumIterator::getBoxNumString() {
 
     for (int i = 0; i < boxCount - 1; i++) {
         toReturn.push_back(boxes[i] + '0');
-        if(seperators[sepCount] - 2 == i) {
+        if(seperators.size() != 0 && seperators[sepCount] - 2 == i) {
             toReturn.push_back(',');
             toReturn.push_back(' ');
             sepCount++;
