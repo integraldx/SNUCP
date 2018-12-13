@@ -20,9 +20,12 @@ class EvalTree {
     bool evaluate(int nums[], int size);
     int getBraketNum();
 
+    friend OperandNode;
+
     private:
     Node* root;
     int result;
+    static vector<int> nums;
 
 
 };
@@ -48,8 +51,8 @@ EvalTree::~EvalTree() {
 }
 
 bool EvalTree::evaluate() {
-    double calcVal = root->getValue();
-    if(abs(calcVal - result) < 0.000005) {
+    Rational calcVal = root->getValue();
+    if((calcVal.up % calcVal.down == 0) && (calcVal.up / calcVal.down == result)) {
         return true;
     }
     else {

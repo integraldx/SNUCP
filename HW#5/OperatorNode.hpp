@@ -12,7 +12,7 @@ class OperatorNode : public Node{
     public:
     OperatorNode(string str);
     ~OperatorNode();
-    virtual double getValue();
+    virtual Rational getValue();
 
     private:
     Op operation;
@@ -131,9 +131,10 @@ OperatorNode::OperatorNode(string str)
 OperatorNode::~OperatorNode() {
 }
 
-double OperatorNode::getValue()
+Rational OperatorNode::getValue()
 {
-    double toReturn;
+    Rational toReturn(0);
+
     switch(operation) {
         case ADD:
         toReturn = left->getValue() + right->getValue();
@@ -148,10 +149,10 @@ double OperatorNode::getValue()
         toReturn = left->getValue() / right->getValue();
         break;
         case MOD:
-        toReturn = (int)left->getValue() % (int)right->getValue();
+        toReturn = left->getValue().up % right->getValue().up;
         break;
         case POW:
-        toReturn = integerPow((int)left->getValue(), (int)right->getValue());
+        toReturn = integerPow(left->getValue().up, right->getValue().up);
         break;
     }
 

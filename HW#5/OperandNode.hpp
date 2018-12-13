@@ -11,29 +11,21 @@ class OperandNode : public Node
     OperandNode(string str);
     ~OperandNode();
 
-    virtual double getValue();
+    virtual Rational getValue();
 
   private:
-    int constant;
+    Rational value;
 };
 
 OperandNode::OperandNode(string str)
 {
-    constant = atoi(str.c_str());
-
-
-    if (integerPow(10, str.length() - 1) > constant && constant != 0) {
-        throw "LENGTH MISMATCH";
-    }
-    else if(constant == 0 && (str.length() != 1)) {
-        throw "ZERO";
-    }
+    value = Rational(atoi(str.c_str()));
 }
 
 OperandNode::~OperandNode() {
 }
 
-double OperandNode::getValue() 
+Rational OperandNode::getValue() 
 {
-    return constant;
+    return value;
 }

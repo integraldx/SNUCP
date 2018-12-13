@@ -1,6 +1,6 @@
 #pragma once
-
 #include <string>
+#include "Rational.hpp"
 
 using namespace std;
 class Node
@@ -21,7 +21,7 @@ class Node
     }
 
     virtual ~Node() = 0;
-    virtual double getValue() = 0;
+    virtual Rational getValue() = 0;
 
   protected:
     Node *left = nullptr;
@@ -37,7 +37,7 @@ Node::~Node() {
     }
 }
 
-int integerPow(int a, int n) {
+long long int integerPow(long long int a, long long int n) {
     if(n == 1) {
         return a;
     }
