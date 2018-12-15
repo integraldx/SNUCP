@@ -149,6 +149,9 @@ Rational OperatorNode::getValue()
         toReturn = left->getValue() / right->getValue();
         break;
         case MOD:
+        if(right->getValue().up == 0) {
+            throw "Div by 0";
+        }
         toReturn = left->getValue().up % right->getValue().up;
         break;
         case POW:

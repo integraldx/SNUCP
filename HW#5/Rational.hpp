@@ -52,6 +52,10 @@ Rational operator*(const Rational& left, const Rational& right) {
     return Rational(left.up * right.up, left.down * right.down);
 }
 
-Rational operator/(const Rational& left, const Rational& right) {
+Rational operator/(const Rational& left, const Rational& right) 
+{
+    if(right.up == 0) {
+        throw "div by 0";
+    }
     return Rational(left.up * right.down, left.down * right.up);
 }

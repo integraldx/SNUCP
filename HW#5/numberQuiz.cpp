@@ -39,7 +39,8 @@ int main() {
                 for (int i = 0; i < nums.size(); i++)
                 {
                     cout << nums[i];
-                    if (*sep == i && sep != seperators.end()) {
+                    if (*sep == i && sep != seperators.end())
+                    {
                         cout << ", ";
                         sep++;
                     }

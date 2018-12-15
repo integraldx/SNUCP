@@ -24,11 +24,12 @@ class OperandNode : public Node
     bool referenced = false;
     int offset;
     vector<int> mults;
+    int strLength;
 };
 
 OperandNode::OperandNode(string str)
 {
-
+    strLength = str.length();
     if(str.find('#') != str.npos) {
         referenced = true;
         fetchInts(str);
@@ -44,7 +45,7 @@ OperandNode::~OperandNode() {
 
 Rational OperandNode::getValue() 
 {
-    if (nums[offset] == 0) {
+    if (referenced && nums[offset] == 0 && strLength != 1) {
         throw "Length Mismatch";
     }
     if(referenced) {
