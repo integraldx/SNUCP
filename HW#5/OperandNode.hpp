@@ -43,6 +43,9 @@ OperandNode::~OperandNode() {
 
 Rational OperandNode::getValue() 
 {
+    if (nums[offset] == 0) {
+        throw "Length Mismatch";
+    }
     if(referenced) {
         long long int shift = 0;
         for (int i = 0; i < mults.size(); i++) {

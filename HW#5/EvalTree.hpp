@@ -59,7 +59,14 @@ bool EvalTree::evaluate() {
     // }
 
     // cout << endl;
-    Rational calcVal = root->getValue();
+
+    Rational calcVal;
+    try {
+        calcVal = root->getValue();
+    }
+    catch(const char*& str) {
+        return false;
+    }
     if((calcVal.up % calcVal.down == 0) && (calcVal.up / calcVal.down == result)) {
         return true;
     }
