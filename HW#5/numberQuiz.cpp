@@ -12,16 +12,21 @@ int main() {
 
     bool isAnswer = false;
 
-    cout << origString.getProcessedString() << endl;
     evalTree = new EvalTree(origString.getProcessedString());
+    auto sep = seperators.begin();
+    sep++;
 
     if (evalTree->evaluate())
     {
         for (int i = 0; i < nums.size(); i++)
         {
-            cout << nums[i] << ", ";
+            cout << nums[i];
+            if (*sep == i && sep != seperators.end())
+            {
+                cout << ", ";
+                sep++;
+            }
         }
-
         cout << endl;
         isAnswer = true;
     }
@@ -33,7 +38,11 @@ int main() {
             {
                 for (int i = 0; i < nums.size(); i++)
                 {
-                    cout << nums[i] << ", ";
+                    cout << nums[i];
+                    if (*sep == i && sep != seperators.end()) {
+                        cout << ", ";
+                        sep++;
+                    }
                 }
 
                 cout << endl;

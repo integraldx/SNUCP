@@ -7,6 +7,7 @@
 using namespace std;
 
 vector<int> nums;
+vector<int> seperators;
 
 class OperandNode : public Node
 {
@@ -61,14 +62,20 @@ Rational OperandNode::getValue()
 
 void OperandNode::fetchInts(string str) {
     offset = nums.size();
+    bool continuous = false;
 
     for (int i = 0; i < str.length(); i++) {
         if(str[i] == '#') {
             nums.push_back(0);
             mults.push_back(str.length() - i - 1);
+            if(!continuous) {
+                seperators.push_back(nums.size() - 2);
+                continuous = true;
+            }
         }
         else {
             value.up += integerPow(10, str.length() - i - 1) * (str[i] - '0');
+            continuous = false;
         }
     }
 }
