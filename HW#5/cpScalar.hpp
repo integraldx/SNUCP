@@ -3,6 +3,7 @@
 
 class cpScalar {
 public:
+    cpScalar();
     cpScalar(int num);
     cpScalar(double num);
 
@@ -19,6 +20,10 @@ private:
     double value;
 
 };
+
+cpScalar::cpScalar() {
+    this->value = 0;
+}
 
 cpScalar::cpScalar(int num) {
     this->value = num;

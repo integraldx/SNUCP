@@ -38,6 +38,9 @@ Node::~Node() {
 }
 
 long long int integerPow(long long int a, long long int n) {
+    if(a == 0 && n == 0) {
+        throw "0^0 error";
+    }
     if(n == 1) {
         return a;
     }
